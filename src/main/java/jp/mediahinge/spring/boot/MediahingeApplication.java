@@ -13,4 +13,5 @@ public class MediahingeApplication {
 		Connect_to_Cloudant CtC = new Connect_to_Cloudant();
 		CtC.Connect_to_Database();
 	}
+	
 }
