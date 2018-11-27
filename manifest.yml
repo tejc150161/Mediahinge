@@ -1,8 +1,11 @@
 ---
 applications:
  - name: Mediahinge
+#   buildpack: https://github.com/cloudfoundry/java-buildpack.git
    random-route: true
    path: target/Mediahinge-0.0.1-SNAPSHOT.jar
    memory: 256M
    instances: 1
+#   env:
+#    SPRING_PROFILES_ACTIVE: cloud
    
