@@ -73,6 +73,14 @@ public class ArticlesBean extends BaseBean{
 	public void setDistribution_date(String distribution_date) {
 		this.distribution_date = distribution_date;
 	}
+	/**
+	 * トピックスID設定
+	 * 
+	 * @param topics_id トピックスID日時
+	 */
+	public void setTopics_id(String topics_id) {
+		this.topics_id = topics_id;
+	}
 	public String toString() {
 	    return "{ _id: " + _id + 
 	    		",\nrev: " + _rev + 

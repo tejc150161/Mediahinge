@@ -11,6 +11,6 @@ public class MediahingeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MediahingeApplication.class, args);
 		Connect_to_Cloudant CtC = new Connect_to_Cloudant();
-		CtC.Connect_to_Database();
+		CtC.Insert_testdata();
 	}
 }
