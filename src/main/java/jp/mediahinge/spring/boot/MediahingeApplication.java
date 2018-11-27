@@ -1,7 +1,5 @@
 package jp.mediahinge.spring.boot;
 
-import java.util.List;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +8,7 @@ public class MediahingeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MediahingeApplication.class, args);
-		Connect_to_Cloudant CtC = new Connect_to_Cloudant();
-		CtC.Insert_testdata();
+//		Connect_to_Cloudant CtC = new Connect_to_Cloudant();
+//		CtC.Insert_testdata();
 	}
 }

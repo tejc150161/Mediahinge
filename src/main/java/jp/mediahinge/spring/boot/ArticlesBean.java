@@ -6,7 +6,7 @@ package jp.mediahinge.spring.boot;
  * @author n.moriyama
  *
  */
-public class ArticlesBean extends BaseBean{
+public class ArticlesBean{
 	private String _id;
 	private String _rev = null;
 	private String media;
