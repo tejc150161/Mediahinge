@@ -1,49 +1,35 @@
 package jp.mediahinge.spring.boot;
 
 import java.io.IOException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import java.net.URL;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
 
 public class GetRss {
+    public static void main(String[] args) throws Exception {
+        String url = "http://gihyo.jp/feed/rss1";
+        // String url = "http://rss.rssad.jp/rss/gihyo/feed/rss2";
+        // String url = "http://rss.rssad.jp/rss/gihyo/feed/atom";
 
-    public static void main(String[] args) {
-        String path = "http://www.asahi.com/articles/ASLCP35WYLCPOHGB006.html?ref=rss";
-        parseXML(path);
-    }
+        URL feedUrl = new URL(url);
+        SyndFeedInput input = new SyndFeedInput();
+        SyndFeed feed = input.build(new XmlReader(feedUrl));
+        
+        // サイトのタイトル
+        System.out.println(feed.getTitle());
+        // サイトのURL
+        System.out.println(feed.getLink());
 
-    public static void parseXML(String path) {
-        try {
-            DocumentBuilderFactory  factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder         builder = factory.newDocumentBuilder();
-            Document                document = builder.parse(path);
-            Element                 root = document.getDocumentElement();
-
-            /* Get and print Title of RSS Feed. */
-            NodeList                channel = root.getElementsByTagName("channel");
-            NodeList                title = ((Element)channel.item(0)).getElementsByTagName("title");
-            System.out.println("\nTitle: " + title.item(0).getFirstChild().getNodeValue() + "\n");
-
-            /* Get Node list of RSS items */
-            NodeList                item_list = root.getElementsByTagName("item");
-            for (int i = 0; i <item_list.getLength(); i++) {
-                Element  element = (Element)item_list.item(i);
-                NodeList item_title = element.getElementsByTagName("title");
-                NodeList item_link  = element.getElementsByTagName("link");
-                System.out.println(" title: " + item_title.item(0).getFirstChild().getNodeValue());
-                System.out.println(" link:  " + item_link.item(0).getFirstChild().getNodeValue() + "\n");
-            }
-        } catch (IOException e) {
-            System.out.println("IO Exception");
-        } catch (ParserConfigurationException e) {
-            System.out.println("Parser Configuration Exception");
-        } catch (SAXException e) {
-            System.out.println("SAX Exception");
+        for (Object obj : feed.getEntries()) {
+            SyndEntry entry = (SyndEntry) obj;
+            // 記事タイトル
+            System.out.println(entry.getTitle());
+            // 記事のURL
+            System.out.println(entry.getLink());
+            // 記事の詳細
+            System.out.println(entry.getDescription().getValue());
         }
-        return;
     }
 }

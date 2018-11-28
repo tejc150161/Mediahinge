@@ -35,6 +35,20 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/rome/rome -->
+		<dependency>
+    		<groupId>rome</groupId>
+    		<artifactId>rome</artifactId>
+    		<version>1.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/jdom/jdom -->
+		<dependency>
+    		<groupId>jdom</groupId>
+    		<artifactId>jdom</artifactId>
+    		<version>1.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -45,6 +59,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
