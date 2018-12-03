@@ -17,25 +17,30 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
-public class GetRss {
+public class GetRss2 {
     public static void main(String[] args) throws Exception {
     	
-    	String urlstr = "http://www3.asahi.com/rss/politics.rdf";
-
+    	String urlstr[] = new String[3];
+    	urlstr[0] = "https://assets.wor.jp/rss/rdf/yomiuri/politics.rdf";
+    	urlstr[1] = "http://www3.asahi.com/rss/politics.rdf";
+    	urlstr[2] = "https://mainichi.jp/rss/etc/mainichi-flash.rss";
+    	
+    	for(int i = 0; i<3; i++) {
         SyndFeedInput input = new SyndFeedInput();
-        URL url = new URL(urlstr);
+        URL url = new URL(urlstr[i]);
         URLConnection urlConnection;
         
         SocketAddress addr = new InetSocketAddress("172.17.0.2", 80);
         Proxy proxy = new Proxy(Proxy.Type.HTTP,addr);
         urlConnection = url.openConnection(proxy);
+        urlConnection.setRequestProperty("User-Agent","Mozilla/5.0");
 
         InputStream str = urlConnection.getInputStream();
         SyndFeed feed = input.build(new XmlReader(urlConnection));
 
         
         // 出力ファイルの作成
-        FileWriter f = new FileWriter("E:\\git\\sample.csv", false);
+        FileWriter f = new FileWriter("E:\\git\\sample.csv", true);
         PrintWriter p = new PrintWriter(new BufferedWriter(f));
         
         // 記事リンク取得
@@ -46,14 +51,15 @@ public class GetRss {
             p.print(entry.getLink());
             p.print(",");
         }
+        p.println();
 
         // ファイルに書き出し閉じる
         p.close();
-        System.out.println("ファイル出力完了！");
+        System.out.println("ファイル出力完了！" + i);
         
+        }
     }
 }
-        
         
 //		urlConnection=url.openConnection();
 //		  URL feedUrl = new URL(url);
@@ -78,3 +84,4 @@ public class GetRss {
 //            // 記事の詳細
 //            System.out.println(entry.getDescription().getValue());
 //        }
+        
