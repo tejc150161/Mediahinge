@@ -12,13 +12,24 @@ import java.net.SocketAddress;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
+
+@SpringBootApplication
+@EnableScheduling
+@Component
 public class GetRss2 {
-    public static void main(String[] args) throws Exception {
+	
+	@Scheduled(cron = "5 * * * * *")
+    public void test() throws Exception{
     	
     	String urlstr[] = new String[3];
     	urlstr[0] = "https://assets.wor.jp/rss/rdf/yomiuri/politics.rdf";
@@ -40,7 +51,7 @@ public class GetRss2 {
 
         
         // 出力ファイルの作成
-        FileWriter f = new FileWriter("E:\\git\\sample.csv", true);
+        FileWriter f = new FileWriter("E:\\git\\rss_data.csv", true);
         PrintWriter p = new PrintWriter(new BufferedWriter(f));
         
         // 記事リンク取得
@@ -55,8 +66,7 @@ public class GetRss2 {
 
         // ファイルに書き出し閉じる
         p.close();
-        System.out.println("ファイル出力完了！" + i);
-        
+        System.out.println("ファイル出力完了！" + i);    
         }
     }
 }
