@@ -1,0 +1,7 @@
+---
+applications:
+ - name: Mediahinge
+   random-route: true
+   path: target/Mediahinge-0.0.1-SNAPSHOT.jar
+   memory: 256M
+   instances: 1
