@@ -24,5 +24,6 @@ public class NLUClontroller {
 	public String test() {
 		service.test_NLU();
 		return "redirect:/nlu";
+//		test 
 	}
 }
