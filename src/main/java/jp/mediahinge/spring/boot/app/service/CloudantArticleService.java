@@ -1,6 +1,5 @@
 package jp.mediahinge.spring.boot.app.service;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -24,13 +23,17 @@ public class CloudantArticleService {
     
     public CloudantArticleService(){
     	System.out.println("debug:instance");
-        CloudantClient cloudant = createClient();
-        if(cloudant!=null){
-         db = cloudant.database(databaseName, true);
-        }
+
     }
     
     public Database getDB(){
+    	
+    	if(db == null) {
+	        CloudantClient cloudant = createClient();
+	        if(cloudant!=null){
+	         db = cloudant.database(databaseName, true);
+	        }
+    	}    	
         return db;
     }
 
@@ -61,8 +64,8 @@ public class CloudantArticleService {
 
         try {
             System.out.println("Connecting to Cloudant");
-//            CloudantClient client = ClientBuilder.url(new URL(url)).build();
-            CloudantClient client = ClientBuilder.url(new URL(url)).proxyURL(new URL("http://172.17.0.2:80")).build();
+            CloudantClient client = ClientBuilder.url(new URL(url)).build();
+//            CloudantClient client = ClientBuilder.url(new URL(url)).proxyURL(new URL("http://172.17.0.2:80")).build();
             return client;
         } catch (Exception e) {
             System.out.println("Unable to connect to database");
@@ -74,7 +77,7 @@ public class CloudantArticleService {
     public Collection<ArticleForm> getAll(){
         List<ArticleForm> docs;
         try {
-            docs = db.getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(ArticleForm.class);
+            docs = getDB().getAllDocsRequestBuilder().includeDocs(true).build().getResponse().getDocsAs(ArticleForm.class);
         } catch (IOException e) {
             return null;
         }
@@ -82,25 +85,25 @@ public class CloudantArticleService {
     }
 
     public ArticleForm get(String id) {
-        return db.find(ArticleForm.class, id);
+        return getDB().find(ArticleForm.class, id);
     }
 
     public ArticleForm persist(ArticleForm articleForm) {
-        String id = db.save(articleForm).getId();
-        return db.find(ArticleForm.class, id);
+        String id = getDB().save(articleForm).getId();
+        return getDB().find(ArticleForm.class, id);
     }
 
     public ArticleForm update(String id, ArticleForm newArticleBean) {
-        ArticleForm ArticleBean = db.find(ArticleForm.class, id);
+        ArticleForm ArticleBean = getDB().find(ArticleForm.class, id);
         ArticleBean.setText(newArticleBean.getText());
-        db.update(ArticleBean);
-        return db.find(ArticleForm.class, id);
+        getDB().update(ArticleBean);
+        return getDB().find(ArticleForm.class, id);
 
     }
 
     public void delete(String id) {
-        ArticleForm ArticleBean = db.find(ArticleForm.class, id);
-        db.remove(id, ArticleBean.get_rev());
+        ArticleForm ArticleBean = getDB().find(ArticleForm.class, id);
+        getDB().remove(id, ArticleBean.get_rev());
 
     }
 
@@ -108,4 +111,7 @@ public class CloudantArticleService {
         return getAll().size();
     }
 
+    public void shutDown() {
+    	this.createClient().shutdown();
+    }
 }

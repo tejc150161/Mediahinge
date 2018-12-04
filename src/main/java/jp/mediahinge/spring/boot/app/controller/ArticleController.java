@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.mediahinge.spring.boot.app.bean.ArticleBean;
 import jp.mediahinge.spring.boot.app.form.ArticleForm;
 import jp.mediahinge.spring.boot.app.service.CloudantArticleService;
-import jp.mediahinge.spring.boot.app.store.ArticleStore;
-import jp.mediahinge.spring.boot.app.store.ArticleStoreFactory;
 
 @Controller
 @RequestMapping("articles")
@@ -82,6 +79,8 @@ public class ArticleController {
 		System.out.println("debug:insert test data");
 		service.persist(articleForm);
 		System.out.println("debug:successfully insert test data");
+		service.shutDown();
+		System.out.println("debug:successfully shutdown  the connection");
 		return "redirect:/articles";
 	}
 }
