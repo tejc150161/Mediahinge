@@ -34,6 +34,7 @@ public class VCAPHelper {
             return null;
         }
         //Convert VCAP_SERVICES String to JSON
+        System.out.println("DEBUG3:" + System.getenv("VCAP_SERVICES"));
         JsonObject obj = (JsonObject) new JsonParser().parse(VCAP_SERVICES);
 
         // Look for the VCAP key that holds the service info
