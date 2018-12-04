@@ -64,9 +64,8 @@ public class CloudantArticleService {
 
         try {
             System.out.println("Connecting to Cloudant");
-//            CloudantClient client = ClientBuilder.url(new URL(url)).build();
-//            CloudantClient client = ClientBuilder.url(new URL(url)).proxyURL(new URL("http://172.17.0.2:80")).build();
             CloudantClient client = ClientBuilder.url(new URL(url)).build();
+//            CloudantClient client = ClientBuilder.url(new URL(url)).proxyURL(new URL("http://172.17.0.2:80")).build();
             return client;
         } catch (Exception e) {
             System.out.println("Unable to connect to database");
