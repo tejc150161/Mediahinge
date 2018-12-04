@@ -1,6 +1,6 @@
 ---
 applications:
- - name: Mediahinge
+ - name: Mediahinge02
    random-route: true
    path: target/Mediahinge-0.0.1-SNAPSHOT.jar
    memory: 256M
