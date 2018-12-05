@@ -22,8 +22,6 @@ public class ArticleController {
 
 	@Autowired
 	CloudantArticleService service;
-	
-//	ArticleStore store = ArticleStoreFactory.getInstance();
 
 	/**
 	 * ModelにFormを初期セットする
@@ -44,9 +42,8 @@ public class ArticleController {
 	@GetMapping
 	public String list(Model model) {
 		System.out.println("debug:ArticleController:01");
-//		store = ArticleStoreFactory.getInstance();
 		if(service == null) {
-			System.out.println("debug:store is null");
+			System.out.println("debug:service is null");
 			System.out.println("debug:ArticleController:02");
 			return "articles/persist";
 		}
