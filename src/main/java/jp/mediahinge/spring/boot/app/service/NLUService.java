@@ -34,7 +34,7 @@ public class NLUService {
 
 		KeywordsOptions keywords = new KeywordsOptions.Builder().build();
 		EntitiesOptions entities = new EntitiesOptions.Builder().build();
-		ConceptsOptions concepts= new ConceptsOptions.Builder().build();
+		ConceptsOptions concepts = new ConceptsOptions.Builder().build();
 
 		Features features = new Features.Builder()
 				.keywords(keywords)
