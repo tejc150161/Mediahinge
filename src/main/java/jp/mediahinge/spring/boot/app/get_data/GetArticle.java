@@ -18,8 +18,6 @@ public class GetArticle {
 
 	@Autowired
 	private CloudantArticleService articleService;
-	
-	private RSSForm rssForm;
 
 	Document document;
 	
@@ -35,8 +33,6 @@ public class GetArticle {
 	private String topics_id = "-1";
 
 	public void insertArticle(RSSForm rssForm) throws Exception{
-		
-		this.rssForm = rssForm;
 
 		document = Jsoup.connect(rssForm.getUrl()).get();
 
@@ -50,7 +46,7 @@ public class GetArticle {
 			processAsahi();
 		}
 		else if(media.equals("mainichi")) {
-			if(category_check()) {
+			if(categoryCheck()) {
 				processMainichi();
 			}
 			else {
@@ -70,7 +66,7 @@ public class GetArticle {
 		articleForm.setTopics_id(topics_id);
 		
 		articleService.persist(articleForm);
-		System.out.println("DEBUG:Successfully inserted article data!");
+		System.out.println("Successfully inserted article data!");
 
 	}
 
@@ -179,12 +175,10 @@ public class GetArticle {
 			}
 		}
 
-		System.out.println("DEBUG:" + distribution_date);
-
 	}
 
-	public boolean category_check() {
-		System.out.println("DEBUG:Category check");
+	public boolean categoryCheck() {
+		System.out.println("Category check");
 
 		Attributes attributes;
 
@@ -198,7 +192,7 @@ public class GetArticle {
 				}
 			}
 		}
-		System.out.println("DEBUG:This is not Political News...");
+		System.out.println("This is not Political News...");
 		return false;
 	}
 

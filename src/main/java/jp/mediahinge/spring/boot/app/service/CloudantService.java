@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 public class CloudantService {
 
     private Database db = null;
-    private static final String databaseName = "mediahinge_db";
+    private static final String databaseName = "mediahinge_db02";
     
     public CloudantService(){
     	System.out.println("debug:instance");
@@ -58,8 +58,8 @@ public class CloudantService {
 
         try {
             System.out.println("Connecting to Cloudant");
-            CloudantClient client = ClientBuilder.url(new URL(url)).build();
-//            CloudantClient client = ClientBuilder.url(new URL(url)).proxyURL(new URL("http://172.17.0.2:80")).build();
+//            CloudantClient client = ClientBuilder.url(new URL(url)).build();
+            CloudantClient client = ClientBuilder.url(new URL(url)).proxyURL(new URL("http://172.17.0.2:80")).build();
             System.out.println("Successfully connected to Cloudant!\n");
             return client;
         } catch (Exception e) {

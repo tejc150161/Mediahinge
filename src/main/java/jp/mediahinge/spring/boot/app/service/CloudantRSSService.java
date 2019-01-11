@@ -43,7 +43,7 @@ public class CloudantRSSService extends CloudantService{
         		"         }\r\n" + 
         		"      ]\r\n" + 
         		"   },\r\n" + 
-        		"   \"use_index\": \"_design/8615868e79c05bc73f85a1385c5f45a2352a056f\",\r\n" + 
+//        		"   \"use_index\": \"_design/8615868e79c05bc73f85a1385c5f45a2352a056f\",\r\n" + 
         		"   \"fields\": [\r\n" + 
         		"      \"_id\",\r\n" + 
         		"      \"_rev\",\r\n" + 
