@@ -1,6 +1,8 @@
 package jp.mediahinge.spring.boot.app.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,15 +66,16 @@ public class ArticleController {
 
 	@PostMapping
 	public String test(Model model) {
+		Date today = new Date();
+		SimpleDateFormat id_format = new SimpleDateFormat("yyyyMMddHHmmss");
 		ArticleForm articleForm = new ArticleForm();
-		articleForm.setArticle_id("2018112701");
+		articleForm.setArticle_id(id_format.format(today));
 		articleForm.setMedia("test");
-		articleForm.setHeading("test");
-		articleForm.setFirst_paragraph("test");
-		articleForm.setText("test");
-		articleForm.setUrl("test");
-		articleForm.setDistribution_date("test");
-		articleForm.setTopics_id("2018112701");
+//		articleForm.setHeading("test");
+//		articleForm.setFirst_paragraph("test");
+//		articleForm.setText("test");
+//		articleForm.setUrl("test");
+//		articleForm.setDistribution_date("test");
 		System.out.println("debug:insert test data");
 		service.persist(articleForm);
 		System.out.println("debug:successfully insert test data");

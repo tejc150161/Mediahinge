@@ -13,9 +13,7 @@ import com.ibm.watson.developer_cloud.service.security.IamOptions;
 
 @Service
 public class NLUService {
-	public NLUService(){
-		
-	}
+	
 	public void test_NLU() {
 		IamOptions options = new IamOptions.Builder()
 				.apiKey("QaOl-WQtrefrhpHZy1XIknYvIom8WpraljZNt2Jcx-FJ")

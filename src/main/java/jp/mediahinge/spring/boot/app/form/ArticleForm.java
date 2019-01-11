@@ -15,16 +15,4 @@ public class ArticleForm extends BaseForm{
 	private String distribution_date;
 	private String topics_id;
 	
-//	public String toString() {
-//	    return "{ _id: " + article_id + 
-//	    		",\nrev: " + _rev + 
-//	    		",\nmedia: " + media + 
-//	    		",\nheading: " + heading + 
-//	    		",\nfirst_paragraph: " + first_paragraph + 
-//	    		",\ntext: " + text + 
-//	    		",\nurl: " + url + 
-//	    		",\ndistribution_date: " + distribution_date + 
-//	    		",\ntopics_id: " + topics_id + 
-//	    		"\n}";
-//	}
 }

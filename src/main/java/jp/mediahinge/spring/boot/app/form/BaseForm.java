@@ -10,5 +10,5 @@ public class BaseForm {
 
 	private String _id;
 	private String _rev;
-	private String errorMsg;
+	private String type;
 }
