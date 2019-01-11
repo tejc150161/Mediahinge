@@ -1,4 +1,4 @@
-package jp.mediahinge.spring.boot.app.get_data;
+package jp.mediahinge.spring.boot.app.schedule;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -15,15 +16,22 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 import jp.mediahinge.spring.boot.app.form.RSSForm;
+import jp.mediahinge.spring.boot.app.get_data.GetArticle;
 import jp.mediahinge.spring.boot.app.service.CloudantRSSService;
 
 @Component
-public class GetRSS {
+public class ScheduledMethods {
 
 	@Autowired
 	private CloudantRSSService rssService;
-	
-	public void insertRSS() throws Exception{
+
+	@Scheduled(cron = "0 * * * * *")
+	@Scheduled(cron = "10 * * * * *")
+	@Scheduled(cron = "20 * * * * *")
+	@Scheduled(cron = "30 * * * * *")
+	@Scheduled(cron = "40 * * * * *")
+	@Scheduled(cron = "50 * * * * *")
+	public void nobu() throws Exception{
 
 		String urlstr[] = new String[3];
 		urlstr[0] = "https://assets.wor.jp/rss/rdf/yomiuri/politics.rdf";//読売
@@ -38,9 +46,11 @@ public class GetRSS {
 			URLConnection urlConnection;
 
 			//以下三行はローカル実行時にのみ必要な記述、デプロイ時にコメントアウト必須
-			SocketAddress addr = new InetSocketAddress("172.17.0.2", 80);
-			Proxy proxy = new Proxy(Proxy.Type.HTTP,addr);
-			urlConnection = url.openConnection(proxy);
+//			SocketAddress addr = new InetSocketAddress("172.17.0.2", 80);
+//			Proxy proxy = new Proxy(Proxy.Type.HTTP,addr);
+//			urlConnection = url.openConnection(proxy);
+
+			urlConnection = url.openConnection();
 
 			urlConnection.setRequestProperty("User-Agent","Mozilla/5.0");
 
@@ -62,7 +72,6 @@ public class GetRSS {
 				SyndEntry entry = (SyndEntry) obj;
 
 				//記事URLが新規のものであった場合
-				System.out.println("DEBUG:" + rssService);
 				if(rssService.findURL(entry.getLink()).size() == 0) {
 
 					rssForm.setUrl(entry.getLink());
@@ -90,6 +99,11 @@ public class GetRSS {
 			System.out.println("Finished reading " + rssForm.getMedia() + "'s rss data\n");
 
 		}
+	}
+	
+	public void test_GetArticle(RSSForm rssForm) throws Exception{
+		GetArticle getArticle = new GetArticle();
+		getArticle.insertArticle(rssForm);
 	}
 
 }
